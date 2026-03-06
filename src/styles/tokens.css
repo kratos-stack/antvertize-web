@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background colors */
+  --color-base: #060816;
+  --color-elevated: #0B1020;
+  --color-surface: #10172A;
+
+  /* Text colors */
+  --color-primary: #F8FAFC;
+  --color-secondary: #CBD5E1;
+  --color-muted: #94A3B8;
+  --color-dark: #0F172A;
+
+  /* Brand colors */
+  --color-violet: #8B5CF6;
+  --color-cyan: #22D3EE;
+  --color-blue: #3B82F6;
+  --color-emerald: #34D399;
+  --color-pink: #EC4899;
+  --color-amber: #F59E0B;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Sora', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Border radius */
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* CSS custom properties for values Tailwind v4 can't express natively */
+:root {
+  --gradient-hero: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 45%, #3B82F6 100%);
+  --gradient-hero-soft: radial-gradient(circle at top left, rgba(139,92,246,0.35), transparent 40%),
+                        radial-gradient(circle at top right, rgba(34,211,238,0.22), transparent 35%);
+  --gradient-cta: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  --gradient-card-border: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04));
+  --gradient-spotlight: radial-gradient(circle, rgba(34,211,238,0.18), transparent 60%);
+
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --border-subtle: rgba(255,255,255,0.10);
+  --divider: rgba(255,255,255,0.08);
+  --shadow-glass: 0 20px 60px rgba(2,6,23,0.38);
+  --shadow-glow: 0 12px 40px rgba(139,92,246,0.22);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.22);
+
+  --motion-fast: 180ms;
+  --motion-base: 280ms;
+  --motion-slow: 450ms;
+}
