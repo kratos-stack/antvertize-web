@@ -15,7 +15,7 @@ const { setRef, isVisible } = useIntersectionReveal()
     <Container>
       <SectionHeader v-if="title" :eyebrow="eyebrow" :title="title" align="center" class="section-head" />
       <div class="cols-grid stagger" :class="{ 'is-visible': isVisible }">
-        <GlassCard v-for="col in columns" :key="col.heading" hover class="col-card">
+        <GlassCard v-for="col in columns" :key="col.heading" hover glow class="col-card">
           <h3 class="col-heading">{{ col.heading }}</h3>
           <p class="col-body">{{ col.body }}</p>
         </GlassCard>

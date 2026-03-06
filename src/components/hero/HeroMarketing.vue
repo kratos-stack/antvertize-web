@@ -130,6 +130,7 @@ const { setRef } = useCursorGlow()
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.08em;
+  line-height: 1.5;
   text-transform: uppercase;
   color: #c4b5fd;
   padding: 6px 16px;

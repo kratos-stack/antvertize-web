@@ -61,11 +61,12 @@ defineProps<CTABannerData>()
 
 .cta-eyebrow {
   display: inline-flex;
-  padding: 5px 16px;
+  padding: 6px 16px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
+  line-height: 1.5;
   text-transform: uppercase;
   background: rgba(139, 92, 246, 0.15);
   border: 1px solid rgba(139, 92, 246, 0.3);

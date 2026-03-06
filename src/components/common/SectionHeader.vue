@@ -31,11 +31,12 @@ defineProps<{
 :deep(.eyebrow) {
   display: inline-flex;
   align-items: center;
-  padding: 5px 14px;
+  padding: 6px 14px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
+  line-height: 1.5;
   text-transform: uppercase;
   background: rgba(139, 92, 246, 0.15);
   border: 1px solid rgba(139, 92, 246, 0.3);
@@ -44,7 +45,7 @@ defineProps<{
 }
 
 :deep(h2) {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   color: var(--color-primary);
 }
 

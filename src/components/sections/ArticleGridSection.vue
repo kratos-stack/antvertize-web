@@ -18,7 +18,7 @@ defineProps<{
       <SectionHeader v-if="title" :eyebrow="eyebrow" :title="title" align="center" class="section-head" />
       <ul class="article-grid" role="list">
         <RevealOnScroll v-for="(item, idx) in items" :key="item.id" as="li" :delay="idx * 80">
-          <GlassCard hover class="article-card">
+          <GlassCard hover glow class="article-card">
             <div class="article-meta">
               <span class="article-category">{{ item.category }}</span>
               <span class="article-read-time">{{ item.readTime }}</span>

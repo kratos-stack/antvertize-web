@@ -112,7 +112,7 @@ const isLink = computed(() =>
   box-shadow: none;
 }
 .app-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-1px);
 }

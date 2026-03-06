@@ -28,7 +28,7 @@ defineProps<{ items: StatItem[] }>()
 <style scoped>
 .stat-section { padding-block: 72px; }
 
-@media (min-width: 1024px) { .stat-section { padding-block: 100px; } }
+@media (min-width: 1024px) { .stat-section { padding-block: 120px; } }
 
 .stat-grid {
   list-style: none;
@@ -47,7 +47,7 @@ defineProps<{ items: StatItem[] }>()
   font-size: clamp(36px, 4vw, 52px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #F8FAFC, rgba(139, 92, 246, 0.9));
+  background: linear-gradient(135deg, #F8FAFC, rgba(139, 92, 246, 0.95));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

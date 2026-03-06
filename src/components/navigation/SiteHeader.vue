@@ -153,9 +153,9 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 36px;
-  height: 36px;
-  padding: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
   margin-left: auto;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
