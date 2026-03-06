@@ -61,11 +61,12 @@ defineProps<CTABannerData>()
 
 .cta-eyebrow {
   display: inline-flex;
-  padding: 5px 16px;
+  padding: 6px 16px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
+  line-height: 1.5;
   text-transform: uppercase;
   background: rgba(139, 92, 246, 0.15);
   border: 1px solid rgba(139, 92, 246, 0.3);
@@ -74,7 +75,7 @@ defineProps<CTABannerData>()
 
 .cta-title {
   font-size: clamp(28px, 4vw, 52px);
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, #F8FAFC, rgba(139, 92, 246, 0.85));
   -webkit-background-clip: text;
