@@ -75,7 +75,7 @@ defineProps<CTABannerData>()
 
 .cta-title {
   font-size: clamp(28px, 4vw, 52px);
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, #F8FAFC, rgba(139, 92, 246, 0.85));
   -webkit-background-clip: text;

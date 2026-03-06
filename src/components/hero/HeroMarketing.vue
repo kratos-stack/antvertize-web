@@ -156,7 +156,7 @@ const { setRef } = useCursorGlow()
 
 :deep(.hero-title) {
   font-size: clamp(38px, 5.5vw, 72px);
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   padding-bottom: 0.12em;
   background: linear-gradient(135deg, #F8FAFC 0%, rgba(248, 250, 252, 0.72) 100%);
