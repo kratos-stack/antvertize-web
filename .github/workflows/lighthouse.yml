@@ -74,7 +74,7 @@ jobs:
               '| --- | ---: | ---: | ---: | ---: | --- |',
               ...rows,
               '',
-              '_Median of 3 runs · thresholds: a11y ≥ 95 (required), perf/bp/seo ≥ 85/90/95 (warn). Full reports linked above._',
+              '_Median of 3 runs · thresholds: a11y ≥ 80 (required), perf/bp/seo ≥ 80 (warn). Full reports linked above._',
             ].join('\n');
             github.rest.issues.createComment({
               owner: context.repo.owner,
