@@ -2,9 +2,9 @@
 import FloatingBadge from '@/components/surfaces/FloatingBadge.vue'
 
 const results = [
-  { id: 'roi',   value: '2.5×', label: 'Increase in ROI',   caption: 'Case Study 1', trend: 'up' as const },
-  { id: 'reach', value: '3×',   label: 'Increase in Reach', caption: 'Case Study 2', trend: 'up' as const },
-  { id: 'cpc',   value: '35%', label: 'Lower CPC',         caption: 'Case Study 3', trend: 'down' as const },
+  { id: 'roi',   value: '+2.5×', label: 'Increase in ROI',   caption: 'Case Study 1', trend: 'up' as const },
+  { id: 'reach', value: '+3×',   label: 'Increase in Reach', caption: 'Case Study 2', trend: 'up' as const },
+  { id: 'cpc',   value: '−35%',  label: 'Lower CPC',         caption: 'Case Study 3', trend: 'down' as const },
 ]
 </script>
 

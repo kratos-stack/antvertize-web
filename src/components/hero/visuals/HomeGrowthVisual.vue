@@ -7,8 +7,8 @@ import FloatingBadge from '@/components/surfaces/FloatingBadge.vue'
     <div class="visual-card">
       <div class="visual-glow" />
       <div class="metric-row">
-        <FloatingBadge value="3.8×" label="Avg. ROAS" variant="violet" icon="↑" />
-        <FloatingBadge value="42%" label="Avg. CPA" variant="cyan" icon="↓" />
+        <FloatingBadge value="Performance" label="First Approach" variant="violet" icon="↑" />
+        <FloatingBadge value="Predictable" label="Growth" variant="cyan" icon="↓" />
       </div>
       <div class="visual-grid">
         <div class="grid-col">
@@ -35,7 +35,7 @@ import FloatingBadge from '@/components/surfaces/FloatingBadge.vue'
       <div class="visual-label">Predictable Growth Trajectory</div>
     </div>
     <FloatingBadge value="10+" label="Years of Expertise" variant="emerald" icon="◆" class="badge-float-1" />
-    <FloatingBadge value="98%" label="Client Retention" variant="violet" icon="★" class="badge-float-2" />
+    <FloatingBadge value="Transparent" label="Reporting" variant="violet" icon="★" class="badge-float-2" />
   </div>
 </template>
 

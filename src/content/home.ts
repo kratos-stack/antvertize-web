@@ -143,7 +143,7 @@ export const homePage: MarketingPageContent = {
       data: {
         eyebrow: 'Ready to scale your ads?',
         title: 'Get your free performance audit today.',
-        description: 'In 48 hours we will send you a no-obligation analysis of your current campaigns with the three highest-impact opportunities to improve ROI.',
+        description: 'Get a no-obligation analysis of your current campaigns and the highest-impact opportunities to improve ROI.',
         primaryCta: { label: 'Get Free Audit', action: 'route', href: '/contact' },
         secondaryCta: { label: 'Book a Strategy Call', action: 'mailto', href: 'mailto:hello@antvertize.com' },
       },

@@ -15,8 +15,8 @@ const channels = [
     <div class="visual-card">
       <div class="visual-glow" />
       <div class="metric-row">
-        <FloatingBadge value="5" label="Core Channels" variant="violet" icon="◆" />
-        <FloatingBadge value="1" label="Unified Strategy" variant="cyan" icon="✦" />
+        <FloatingBadge value="Integrated" label="Channel Mix" variant="violet" icon="◆" />
+        <FloatingBadge value="Unified" label="Strategy" variant="cyan" icon="✦" />
       </div>
 
       <ul class="channel-list" role="list">
@@ -34,8 +34,8 @@ const channels = [
       <div class="visual-label">Integrated Channel Mix</div>
     </div>
 
-    <FloatingBadge value="42%" label="Avg. CPA" variant="emerald" icon="↓" class="badge-float-1" />
-    <FloatingBadge value="3.8×" label="Avg. ROAS" variant="violet" icon="↑" class="badge-float-2" />
+    <FloatingBadge value="Performance" label="First Approach" variant="emerald" icon="↓" class="badge-float-1" />
+    <FloatingBadge value="Transparent" label="Reporting" variant="violet" icon="↑" class="badge-float-2" />
   </div>
 </template>
 

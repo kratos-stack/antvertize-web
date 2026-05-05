@@ -82,7 +82,7 @@ const variant = computed(() => props.variant ?? 'check')
 
 .bullet-inner {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   padding: 22px 24px;
   background: var(--glass-bg);

@@ -52,7 +52,7 @@ const lastUpdated = 'May 2026'
           <p>We do not sell your personal data. We may share data with trusted service providers (CRM, email, analytics, ad platforms) who are contractually obligated to protect it, and only as necessary to deliver the services you request.</p>
 
           <h2>7. Data Retention</h2>
-          <p>We retain personal data for as long as necessary to fulfil the purposes outlined in this policy, or as required by law. Client engagement data is typically retained for up to 7 years for legal and tax compliance.</p>
+          <p>We retain personal data for as long as necessary to fulfil the purposes outlined in this policy, or as required by applicable law. Client engagement data is retained for the period required by legal and tax compliance obligations.</p>
 
           <h2>8. Your Rights</h2>
           <p>You have the right to access, correct, delete, or restrict processing of your personal data. To exercise these rights, contact us at <a href="mailto:hello@antvertize.com">hello@antvertize.com</a>.</p>
