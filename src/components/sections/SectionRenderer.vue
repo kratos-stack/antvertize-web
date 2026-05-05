@@ -10,6 +10,10 @@ import MarqueeBand from './MarqueeBand.vue'
 import CTASection from './CTASection.vue'
 import ValueWordCloudSection from './ValueWordCloudSection.vue'
 import TextColumnsSection from './TextColumnsSection.vue'
+import TrustBarSection from './TrustBarSection.vue'
+import BulletListSection from './BulletListSection.vue'
+import FeatureTabsSection from './FeatureTabsSection.vue'
+import ContactFormSection from './ContactFormSection.vue'
 
 defineProps<{ sections: PageSection[] }>()
 </script>
@@ -65,6 +69,21 @@ defineProps<{ sections: PageSection[] }>()
     <TextColumnsSection
       v-else-if="section.type === 'text-columns'"
       v-bind="section.data"
+    />
+    <TrustBarSection
+      v-else-if="section.type === 'trust-bar'"
+      v-bind="section.data"
+    />
+    <BulletListSection
+      v-else-if="section.type === 'bullet-list'"
+      v-bind="section.data"
+    />
+    <FeatureTabsSection
+      v-else-if="section.type === 'feature-tabs'"
+      v-bind="section.data"
+    />
+    <ContactFormSection
+      v-else-if="section.type === 'contact-form'"
     />
   </template>
 </template>

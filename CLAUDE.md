@@ -4,23 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a premium multi-page marketing website for a digital/AI/branding agency. The project is defined by `SPEC.md` and is to be built from scratch using Vue 3 + TypeScript + Vite + Tailwind CSS.
+Marketing website for **Antvertize**, a performance digital advertising agency. The current source of truth for what the site says is `WEBSITE-CONTENT.md`. Everything is built with Vue 3 + TypeScript + Vite + Tailwind CSS.
+
+Earlier specs `SPEC.md` and `SPEC-2.md` describe the previous (multi-discipline) version of the site and are kept for historical reference only — do not treat them as current copy.
 
 ## Commands
 
-Once the project is scaffolded, standard commands will be:
-
 ```bash
 npm run dev       # Start Vite dev server
-npm run build     # Production build
+npm run build     # Production build (vue-tsc -b && vite build)
 npm run preview   # Preview production build
-npm run typecheck # Run Vue TSC type checking
-npm run lint      # Run ESLint
-```
-
-To run a single test file (once tests are added):
-```bash
-npx vitest run src/path/to/file.test.ts
 ```
 
 ## Tech Stack
@@ -29,69 +22,85 @@ npx vitest run src/path/to/file.test.ts
 - **Language**: TypeScript
 - **Build**: Vite with route-level code splitting
 - **Routing**: Vue Router
-- **Styling**: Tailwind CSS
-- **SEO**: `@vueuse/head`
-- **Forms**: vee-validate + zod (optional)
-- **Animation**: Motion One or lightweight IntersectionObserver utilities
+- **Styling**: Tailwind CSS v4 with custom design tokens in `src/styles/tokens.css`
+- **SEO**: `@vueuse/head` via `composables/useSeo.ts`
+
+## Routes
+
+| Path | Page | Notes |
+|------|------|------|
+| `/` | HomePage | |
+| `/services` | ServicesPage | 5 ad services |
+| `/about` | AboutPage | |
+| `/case-studies` | CaseStudiesPage | |
+| `/contact` | ContactPage | Free-audit form |
+| `/privacy-policy` | PrivacyPage | |
+| `/terms-and-conditions` | TermsPage | |
+
+Legacy paths (`/digital-marketing-services`, `/branding-services`, `/website-development-services`, `/marketing-services`, `/about-antvertize`, `/careers`) redirect to the closest current route. The corresponding `BrandingPage.vue`, `WebsitesPage.vue`, `MarketingPage.vue`, `CareersPage.vue` and their content `.ts` files are kept on disk but unrouted, in case they are reactivated later.
 
 ## Architecture
 
-### Core Pattern: Data-Driven Pages
+### Core pattern: data-driven pages
 
-Pages are thin shells. All copy lives in `src/content/*.ts` files. Components are purely presentational. The `SectionRenderer` component maps `section.type` strings to the correct section component — pages simply pass their content data through it.
+Pages are thin shells. All copy lives in `src/content/*.ts`. Components are presentational. `SectionRenderer` maps `section.type` strings to the correct section component — pages just pass their content through it.
 
 ```
-Page.vue → imports content from src/content/page.ts
+Page.vue → imports content from src/content/<page>.ts
          → passes hero to HeroMarketing
          → passes sections[] to SectionRenderer
          → SectionRenderer dispatches to correct section component
 ```
 
-### Directory Structure
+### Directory structure
 
 ```
 src/
   app/
-    router/index.ts          # Vue Router config (9 routes)
+    router/index.ts          # Visible routes + redirects + 404 catch-all
     layouts/DefaultLayout.vue
   components/
-    common/                  # AppButton, AppLink, SectionHeader, Container, BadgePill
+    common/                  # AppButton, AppLink, SectionHeader, Container, BadgePill, RevealOnScroll
     navigation/              # SiteHeader, MobileMenu, SiteFooter
-    hero/                    # HeroMarketing
+    hero/                    # HeroMarketing (layout: 'split' | 'centered')
     surfaces/                # GlassCard, SpotlightCard, CursorGlowSurface, GradientBackdrop, FloatingBadge
-    sections/                # SectionRenderer + all section components
-    forms/                   # ConsultationForm
-  composables/               # useSeo, useBreakpoints, useIntersectionReveal, useCursorGlow
+    sections/                # SectionRenderer + section components (see below)
+    forms/                   # ContactForm
+  composables/               # useSeo, useBreakpoints, useIntersectionReveal, useScrollReveal, useCursorGlow
   content/                   # site.config.ts, navigation.ts, footer.ts, one file per page
   pages/                     # One .vue per route (thin, data-driven)
-  types/                     # content.ts, seo.ts, cta.ts
+  types/                     # content.ts
   styles/                    # tokens.css, base.css
 ```
 
-### Routes
+### Section types (`src/types/content.ts` → `PageSection`)
 
-| Path | Page |
-|------|------|
-| `/` | HomePage |
-| `/digital-marketing-services` | ServicesPage |
-| `/branding-services` | BrandingPage |
-| `/website-development-services` | WebsitesPage |
-| `/marketing-services` | MarketingPage |
-| `/about-antvertize` | AboutPage |
-| `/careers` | CareersPage |
-| `/privacy-policy` | PrivacyPage |
-| `/terms-and-conditions` | TermsPage |
+`stat-grid` · `service-detail-list` · `card-grid` · `case-study-grid` · `article-grid` · `faq` · `marquee` · `cta-banner` · `value-word-cloud` · `text-columns` · `trust-bar` · `bullet-list` · `contact-form`
 
-### Key Types (`src/types/content.ts`)
+To add a new section type:
 
-- `CTA` — label, href, action (`route | scroll | modal | external | submit`), target
-- `SeoMeta` — title, description, canonical, OG fields
-- `HeroContent` — eyebrow, title, subtitle, CTAs, highlights, media
-- `StatItem` — value, title, description
-- `ServiceItem` — id, label, title, body[], bullets[], cta, media, layout (`left | right`)
-- `FAQItem` — question, answer
-- `PageSection` — discriminated union on `type` field
-- `MarketingPageContent` — seo + hero + sections[]
+1. Add it to the `PageSection` discriminated union in `src/types/content.ts`.
+2. Add a section component under `src/components/sections/`.
+3. Register it in `SectionRenderer.vue`.
+
+### CTAs
+
+CTAs use the `CTA` type from `src/types/content.ts`:
+
+```ts
+type CTA = {
+  label: string
+  href?: string
+  action?: 'route' | 'scroll' | 'modal' | 'external' | 'submit' | 'mailto'
+  target?: '_self' | '_blank'
+}
+```
+
+`AppButton` renders the right element automatically: `<RouterLink>` for `route`, `<a href="mailto:…">` for `mailto`, `<a target="_blank">` for `external`, and `<button>` for everything else.
+
+### Contact form
+
+`ContactForm.vue` collects Name, Email, Business, Monthly Ad Spend, Message. Submit assembles a `mailto:hello@antvertize.com` URL with a subject and body and opens the user's mail client. No backend required. To wire a real endpoint, replace the `window.location.href = mailtoHref.value` line in `submit()`.
 
 ## Design Tokens
 
@@ -105,11 +114,11 @@ src/
 
 ## LLM Code Generation Rules
 
-- Never hardcode copy inside components — all text goes in `src/content/*.ts`
-- Use Vue 3 Composition API with `<script setup>` only
-- Keep components reusable and presentational
-- Use Tailwind utilities; avoid ad hoc inline styles where Tailwind covers it
-- CTA behavior must be configurable via the `CTA` type (no hardcoded `router.push`)
-- Cursor spotlight glow: CSS variables + `requestAnimationFrame`; disable on mobile and `prefers-reduced-motion`
-- Support future Nuxt migration: use semantic HTML, avoid browser-only globals without guards
-- Route-level lazy loading via dynamic imports in the router
+- Never hardcode copy inside components — all text goes in `src/content/*.ts`.
+- Use Vue 3 Composition API with `<script setup>` only.
+- Keep components reusable and presentational.
+- Use Tailwind utilities; avoid ad-hoc inline styles where Tailwind covers it.
+- CTA behavior must be configurable via the `CTA` type — no hardcoded `router.push` inside components.
+- Cursor spotlight glow: CSS variables + `requestAnimationFrame`; disable on mobile and `prefers-reduced-motion`.
+- Support future Nuxt migration: use semantic HTML, avoid browser-only globals without guards.
+- Route-level lazy loading via dynamic imports in the router.

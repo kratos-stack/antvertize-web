@@ -1,8 +1,44 @@
 export type CTA = {
   label: string
   href?: string
-  action?: 'route' | 'scroll' | 'modal' | 'external' | 'submit'
+  action?: 'route' | 'scroll' | 'modal' | 'external' | 'submit' | 'mailto'
   target?: '_self' | '_blank'
+}
+
+export type TrustBarData = {
+  eyebrow?: string
+  items: string[]
+}
+
+export type BulletListItem = {
+  id: string
+  title: string
+  description?: string
+}
+
+export type BulletListData = {
+  eyebrow?: string
+  title?: string
+  intro?: string
+  items: BulletListItem[]
+  variant?: 'check' | 'numbered' | 'icon'
+  columns?: 1 | 2 | 3
+}
+
+export type FeatureTab = {
+  id: string
+  label: string
+  icon?: string
+  heading?: string
+  items: string[]
+}
+
+export type FeatureTabsData = {
+  eyebrow?: string
+  title?: string
+  intro?: string
+  tabs: FeatureTab[]
+  autoplayMs?: number
 }
 
 export type SeoMeta = {
@@ -14,6 +50,13 @@ export type SeoMeta = {
   ogImage?: string
   robots?: string
 }
+
+export type HeroVisualKey =
+  | 'home-growth'
+  | 'services-channels'
+  | 'about-decade'
+  | 'case-studies-results'
+  | 'contact-audit'
 
 export type HeroContent = {
   eyebrow?: string
@@ -27,12 +70,20 @@ export type HeroContent = {
     alt: string
   }
   highlights?: string[]
+  layout?: 'split' | 'centered'
+  /** Which visual composition to render in the right column (split layout only). */
+  visual?: HeroVisualKey
 }
 
 export type StatItem = {
   value: string
   title: string
   description: string
+}
+
+export type ServiceMetric = {
+  value: string
+  label: string
 }
 
 export type ServiceItem = {
@@ -47,6 +98,7 @@ export type ServiceItem = {
     src: string
     alt: string
   }
+  metrics?: ServiceMetric[]
   layout?: 'left' | 'right'
 }
 
@@ -108,6 +160,10 @@ export type PageSection =
   | { type: 'cta-banner'; data: CTABannerData }
   | { type: 'value-word-cloud'; title?: string; eyebrow?: string; items: string[] }
   | { type: 'text-columns'; data: TextColumnsData }
+  | { type: 'trust-bar'; data: TrustBarData }
+  | { type: 'bullet-list'; data: BulletListData }
+  | { type: 'feature-tabs'; data: FeatureTabsData }
+  | { type: 'contact-form' }
 
 export type MarketingPageContent = {
   seo: SeoMeta

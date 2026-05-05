@@ -7,6 +7,7 @@ const props = defineProps<{
   cta: CTA
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -19,6 +20,7 @@ const variant = computed(() => props.variant ?? 'primary')
 const size = computed(() => props.size ?? 'md')
 
 function handleClick() {
+  if (props.disabled) return
   const { action, href } = props.cta
   if (action === 'route' && href) {
     router.push(href)
@@ -33,13 +35,24 @@ function handleClick() {
 }
 
 const isLink = computed(() =>
-  (props.cta.action === 'route' || props.cta.action === 'external') && !!props.cta.href
+  (props.cta.action === 'route' || props.cta.action === 'external' || props.cta.action === 'mailto') && !!props.cta.href
 )
+
+const isMailto = computed(() => props.cta.action === 'mailto' && !!props.cta.href)
+const isSubmit = computed(() => props.cta.action === 'submit')
 </script>
 
 <template>
   <a
-    v-if="isLink && cta.action === 'external'"
+    v-if="isMailto && !disabled"
+    :href="cta.href"
+    class="app-btn"
+    :class="[variant, size]"
+  >
+    <slot>{{ cta.label }}</slot>
+  </a>
+  <a
+    v-else-if="isLink && cta.action === 'external' && !disabled"
     :href="cta.href"
     :target="cta.target ?? '_blank'"
     rel="noopener noreferrer"
@@ -49,7 +62,7 @@ const isLink = computed(() =>
     <slot>{{ cta.label }}</slot>
   </a>
   <RouterLink
-    v-else-if="isLink && cta.action === 'route'"
+    v-else-if="isLink && cta.action === 'route' && !disabled"
     :to="cta.href!"
     class="app-btn"
     :class="[variant, size]"
@@ -57,10 +70,22 @@ const isLink = computed(() =>
     <slot>{{ cta.label }}</slot>
   </RouterLink>
   <button
+    v-else-if="isSubmit"
+    type="submit"
+    class="app-btn"
+    :class="[variant, size, { 'is-disabled': disabled }]"
+    :disabled="disabled"
+    :aria-disabled="disabled || undefined"
+  >
+    <slot>{{ cta.label }}</slot>
+  </button>
+  <button
     v-else
     type="button"
     class="app-btn"
-    :class="[variant, size]"
+    :class="[variant, size, { 'is-disabled': disabled }]"
+    :disabled="disabled"
+    :aria-disabled="disabled || undefined"
     @click="handleClick"
   >
     <slot>{{ cta.label }}</slot>
@@ -85,6 +110,13 @@ const isLink = computed(() =>
               opacity var(--motion-fast) ease;
   position: relative;
   overflow: hidden;
+}
+
+.app-btn[disabled],
+.app-btn.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .app-btn.sm { padding: 10px 18px; font-size: 14px; }

@@ -1,56 +1,44 @@
 <script setup lang="ts">
 import Container from '@/components/common/Container.vue'
 import AppLink from '@/components/common/AppLink.vue'
+import AntvertizeLogo from '@/components/common/AntvertizeLogo.vue'
 import RevealOnScroll from '@/components/common/RevealOnScroll.vue'
 import { footerContent } from '@/content/footer'
-import { navItems } from '@/content/navigation'
 </script>
 
 <template>
   <footer class="site-footer">
     <Container>
-      <!-- Top: logo + nav columns -->
       <RevealOnScroll as="div" class="footer-top">
         <div class="footer-brand">
-          <RouterLink to="/" class="logo">
-            <span class="logo-mark" aria-hidden="true">P</span>
-            <span class="logo-text">Antvertize</span>
+          <RouterLink to="/" class="logo" aria-label="Antvertize home">
+            <AntvertizeLogo :height="32" />
           </RouterLink>
-          <p class="brand-desc">
-            Premium brand, website, and growth services for modern businesses ready to lead their market.
+          <p class="footer-tagline">{{ footerContent.tagline }}</p>
+          <p class="footer-service-line">
+            <em>{{ footerContent.serviceLine }}</em>
           </p>
+          <a class="footer-email" :href="`mailto:${footerContent.email}`">
+            {{ footerContent.email }}
+          </a>
         </div>
 
         <nav class="footer-nav" aria-label="Footer navigation">
-          <div class="nav-col">
-            <span class="nav-heading">Services</span>
-            <ul role="list">
-              <li v-for="item in navItems" :key="item.href">
-                <AppLink :href="item.href">{{ item.label }}</AppLink>
-              </li>
-            </ul>
-          </div>
-          <div class="nav-col">
-            <span class="nav-heading">Company</span>
-            <ul role="list">
-              <li><AppLink href="/about-antvertize">About Us</AppLink></li>
-              <li><AppLink href="/careers">Careers</AppLink></li>
-            </ul>
-          </div>
+          <span class="nav-heading">Sitemap</span>
+          <ul role="list" class="footer-links-list">
+            <li v-for="item in footerContent.navLinks" :key="item.href">
+              <AppLink :href="item.href">{{ item.label }}</AppLink>
+            </li>
+          </ul>
         </nav>
       </RevealOnScroll>
 
-      <!-- City presence -->
-      <p class="city-line" aria-label="Our locations">{{ footerContent.cityLine }}</p>
-
-      <!-- Divider -->
       <div class="divider" role="separator" />
 
-      <!-- Bottom bar -->
       <RevealOnScroll as="div" class="footer-bottom" :delay="80">
-        <p class="address">{{ footerContent.address }}</p>
-        <div class="footer-links">
-          <AppLink v-for="link in footerContent.links" :key="link.href" :href="link.href">
+        <p class="copyright">{{ footerContent.copyright }}</p>
+        <div class="legal-links">
+          <AppLink v-for="link in footerContent.legalLinks" :key="link.href" :href="link.href">
             {{ link.label }}
           </AppLink>
         </div>
@@ -65,7 +53,6 @@ import { navItems } from '@/content/navigation'
             class="social-icon"
           >{{ s.icon }}</a>
         </div>
-        <p class="copyright">{{ footerContent.copyright }}</p>
       </RevealOnScroll>
     </Container>
   </footer>
@@ -85,67 +72,64 @@ import { navItems } from '@/content/navigation'
 }
 
 @media (min-width: 768px) {
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-  }
+  .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 1024px) {
-  .footer-top {
-    grid-template-columns: 1.5fr 1fr;
-  }
+  .footer-top { grid-template-columns: 1.6fr 1fr; }
 }
 
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
   width: fit-content;
-}
-
-.logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #8B5CF6, #22D3EE);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.logo-text {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
   color: var(--color-primary);
 }
 
-.brand-desc {
-  font-size: 15px;
-  line-height: 1.7;
+.footer-tagline {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-primary);
+  max-width: 380px;
+  margin: 0;
+}
+
+.footer-service-line {
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--color-muted);
-  max-width: 340px;
+  margin: 0;
+}
+
+.footer-service-line em {
+  font-style: italic;
+}
+
+.footer-email {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: #c4b5fd;
+  text-decoration: none;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--motion-fast) ease;
+}
+
+.footer-email:hover {
+  border-bottom-color: rgba(196, 181, 253, 0.5);
 }
 
 .footer-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
-
-.nav-col {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -159,23 +143,34 @@ import { navItems } from '@/content/navigation'
   color: var(--color-muted);
 }
 
-.nav-col ul {
+.footer-links-list {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin: 0;
+  padding: 0;
+  /* Single column on phones; wraps to 2 columns at small breakpoints,
+     then 3 columns from tablet up so the sitemap reads horizontally. */
+  column-count: 1;
+  column-gap: 32px;
 }
 
-.nav-col ul li a {
+@media (min-width: 480px) {
+  .footer-links-list { column-count: 2; }
+}
+
+@media (min-width: 768px) {
+  .footer-links-list { column-count: 3; }
+}
+
+.footer-links-list li {
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.footer-links-list li:last-child { margin-bottom: 0; }
+
+.footer-links-list li a {
   font-size: 14px;
-  color: var(--color-muted);
-}
-
-.city-line {
-  font-size: 13px;
-  color: var(--color-muted);
-  letter-spacing: 0.04em;
-  margin-bottom: 32px;
+  color: var(--color-secondary);
 }
 
 .divider {
@@ -193,12 +188,18 @@ import { navItems } from '@/content/navigation'
   color: var(--color-muted);
 }
 
-.footer-links {
+.copyright {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.legal-links {
   display: flex;
   gap: 20px;
 }
 
-.footer-links a {
+.legal-links a {
   font-size: 13px;
   color: var(--color-muted);
 }
@@ -228,11 +229,5 @@ import { navItems } from '@/content/navigation'
 .social-icon:hover {
   color: var(--color-primary);
   border-color: rgba(255, 255, 255, 0.2);
-}
-
-.copyright {
-  font-size: 13px;
-  color: var(--color-muted);
-  width: 100%;
 }
 </style>

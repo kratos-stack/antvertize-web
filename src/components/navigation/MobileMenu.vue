@@ -2,6 +2,7 @@
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AppButton from '@/components/common/AppButton.vue'
+import AntvertizeLogo from '@/components/common/AntvertizeLogo.vue'
 import { navItems, navCta } from '@/content/navigation'
 
 const props = defineProps<{ open: boolean }>()
@@ -24,8 +25,7 @@ watch(() => props.open, (val) => {
     <div v-if="open" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
       <div class="menu-header">
         <RouterLink to="/" class="logo" @click="emit('close')">
-          <span class="logo-mark">P</span>
-          <span class="logo-text">Antvertize</span>
+          <AntvertizeLogo :height="32" :animate="false" />
         </RouterLink>
         <button class="close-btn" aria-label="Close menu" @click="emit('close')">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -78,30 +78,9 @@ watch(() => props.open, (val) => {
 }
 
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
-}
-
-.logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #8B5CF6, #22D3EE);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-}
-
-.logo-text {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
   color: var(--color-primary);
 }
 

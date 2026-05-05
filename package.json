@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lighthouse": "npm run build && npx --yes @lhci/cli@0.14.x autorun --config=./.lighthouserc.json"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",

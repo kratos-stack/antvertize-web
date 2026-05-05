@@ -1,21 +1,14 @@
 export const siteConfig = {
   name: 'Antvertize',
-  tagline: 'Premium Digital Agency',
-  description: 'Brand, website, and growth services for modern businesses.',
+  tagline: 'Driving results through smarter advertising.',
+  description: 'Performance-driven digital advertising agency. Programmatic, PPC, paid social, display, and video campaigns built to scale ROI.',
   url: 'https://antvertize.com',
   email: 'hello@antvertize.com',
-  phone: '+1 (800) 555-0190',
-  address: {
-    street: '350 Fifth Avenue, Suite 4100',
-    city: 'New York',
-    state: 'NY',
-    zip: '10118',
-    country: 'USA',
-  },
+  mailto: 'mailto:hello@antvertize.com',
   social: {
-    twitter: 'https://twitter.com/antvertize',
     linkedin: 'https://linkedin.com/company/antvertize',
+    twitter: 'https://twitter.com/antvertize',
     instagram: 'https://instagram.com/antvertize',
   },
-  cities: ['New York', 'Los Angeles', 'London', 'Dubai', 'Singapore'],
+  regions: ['United States', 'Europe', 'India'],
 }

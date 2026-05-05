@@ -16,34 +16,24 @@ const router = createRouter({
       component: () => import('@/pages/HomePage.vue'),
     },
     {
-      path: '/digital-marketing-services',
+      path: '/services',
       name: 'services',
       component: () => import('@/pages/ServicesPage.vue'),
     },
     {
-      path: '/branding-services',
-      name: 'branding',
-      component: () => import('@/pages/BrandingPage.vue'),
-    },
-    {
-      path: '/website-development-services',
-      name: 'websites',
-      component: () => import('@/pages/WebsitesPage.vue'),
-    },
-    {
-      path: '/marketing-services',
-      name: 'marketing',
-      component: () => import('@/pages/MarketingPage.vue'),
-    },
-    {
-      path: '/about-antvertize',
+      path: '/about',
       name: 'about',
       component: () => import('@/pages/AboutPage.vue'),
     },
     {
-      path: '/careers',
-      name: 'careers',
-      component: () => import('@/pages/CareersPage.vue'),
+      path: '/case-studies',
+      name: 'case-studies',
+      component: () => import('@/pages/CaseStudiesPage.vue'),
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('@/pages/ContactPage.vue'),
     },
     {
       path: '/privacy-policy',
@@ -55,6 +45,15 @@ const router = createRouter({
       name: 'terms',
       component: () => import('@/pages/TermsPage.vue'),
     },
+
+    { path: '/digital-marketing-services', redirect: '/services' },
+    { path: '/branding-services', redirect: '/services' },
+    { path: '/website-development-services', redirect: '/services' },
+    { path: '/marketing-services', redirect: '/services' },
+    { path: '/about-antvertize', redirect: '/about' },
+    { path: '/careers', redirect: '/about' },
+
+    { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })
 

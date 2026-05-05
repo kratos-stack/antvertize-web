@@ -20,7 +20,7 @@ export const marketingPage: MarketingPageContent = {
       items: [
         { value: '£180M+', title: 'Ad Spend Managed', description: 'Annual ad spend under management across Google, Meta, LinkedIn, and programmatic channels.' },
         { value: '3.8×', title: 'Average ROAS', description: 'Average return on ad spend across our managed accounts, benchmarked quarterly.' },
-        { value: '-42%', title: 'Avg. CPA Reduction', description: 'Average reduction in cost per acquisition in the first 90 days of campaign management.' },
+        { value: '42%', title: 'Avg. CPA Reduction', description: 'Average reduction in cost per acquisition in the first 90 days of campaign management.' },
         { value: '220+', title: 'Active Campaigns', description: 'Live campaigns across paid search, paid social, programmatic, SEO, and email channels.' },
       ],
     },

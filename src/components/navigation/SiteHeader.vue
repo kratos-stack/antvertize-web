@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Container from '@/components/common/Container.vue'
 import AppButton from '@/components/common/AppButton.vue'
+import AntvertizeLogo from '@/components/common/AntvertizeLogo.vue'
 import MobileMenu from './MobileMenu.vue'
 import { navItems, navCta } from '@/content/navigation'
 
@@ -29,8 +30,7 @@ onUnmounted(() => {
       <nav class="nav-inner" aria-label="Main navigation">
         <!-- Logo -->
         <RouterLink to="/" class="logo" aria-label="Antvertize home">
-          <span class="logo-mark" aria-hidden="true">P</span>
-          <span class="logo-text">Antvertize</span>
+          <AntvertizeLogo :height="32" />
         </RouterLink>
 
         <!-- Desktop nav -->
@@ -90,31 +90,10 @@ onUnmounted(() => {
 }
 
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
-}
-
-.logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #8B5CF6, #22D3EE);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-}
-
-.logo-text {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
   color: var(--color-primary);
 }
 

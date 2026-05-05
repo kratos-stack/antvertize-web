@@ -1,13 +1,15 @@
+import type { CTA } from '@/types/content'
+
 export const navItems = [
-  { label: 'Services', href: '/digital-marketing-services' },
-  { label: 'Branding', href: '/branding-services' },
-  { label: 'Websites', href: '/website-development-services' },
-  { label: 'Marketing', href: '/marketing-services' },
-  { label: 'About', href: '/about-antvertize' },
-  { label: 'Careers', href: '/careers' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Contact', href: '/contact' },
 ]
 
-export const navCta = {
-  label: 'Get a Free Consultation',
-  action: 'modal' as const,
+export const navCta: CTA = {
+  label: 'Get Free Audit',
+  action: 'route',
+  href: '/contact',
 }

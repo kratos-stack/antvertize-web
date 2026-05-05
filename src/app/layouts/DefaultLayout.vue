@@ -5,8 +5,9 @@ import SiteFooter from '@/components/navigation/SiteFooter.vue'
 
 <template>
   <div class="default-layout">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader />
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <SiteFooter />
