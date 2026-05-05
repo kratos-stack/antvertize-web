@@ -34,7 +34,7 @@ export const caseStudiesPage: MarketingPageContent = {
           ],
           metrics: [
             { value: '2.5×', label: 'ROI Lift' },
-            { value: '−40%', label: 'CPA Reduction' },
+            { value: '40%', label: 'CPA Reduction' },
             { value: '3 stages', label: 'Funnel Rebuild' },
             { value: '90 days', label: 'To Result' },
           ],
