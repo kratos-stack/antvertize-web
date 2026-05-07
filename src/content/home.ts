@@ -3,7 +3,7 @@ import type { MarketingPageContent } from '@/types/content'
 export const homePage: MarketingPageContent = {
   seo: {
     title: 'Antvertize — Turn Ad Spend Into Predictable Growth',
-    description: 'Antvertize delivers performance-driven digital advertising backed by 10+ years of expertise across programmatic, PPC, social, and video campaigns.',
+    description: 'Antvertize delivers performance-driven digital advertising backed by consultants with 10+ years of expertise across programmatic, PPC, social, and video campaigns.',
     canonical: 'https://antvertize.com/',
     ogTitle: 'Antvertize — Performance Digital Advertising Agency',
     ogDescription: 'Programmatic, PPC, paid social, display, and video campaigns engineered to scale ROI.',
@@ -11,7 +11,7 @@ export const homePage: MarketingPageContent = {
   hero: {
     eyebrow: 'Performance Digital Advertising',
     title: 'Turn Ad Spend Into Predictable Growth',
-    subtitle: 'Antvertize delivers performance-driven digital advertising backed by 10+ years of expertise across programmatic, PPC, social, and video campaigns.',
+    subtitle: 'Antvertize delivers performance-driven digital advertising backed by consultants with 10+ years of expertise across programmatic, PPC, social, and video campaigns.',
     primaryCta: { label: 'Get Free Audit', action: 'route', href: '/contact' },
     secondaryCta: { label: 'Book a Strategy Call', action: 'mailto', href: 'mailto:hello@antvertize.com' },
     highlights: ['Programmatic', 'PPC', 'Paid Social', 'Display', 'Video'],
