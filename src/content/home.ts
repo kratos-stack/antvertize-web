@@ -28,7 +28,7 @@ export const homePage: MarketingPageContent = {
     {
       type: 'card-grid',
       eyebrow: 'What We Do',
-      title: 'We help brands scale profitably through data-driven advertising. No guesswork. No wasted spend.',
+      title: 'We help brands scale profitably through data-driven advertising.',
       items: [
         {
           id: 'programmatic',
@@ -72,7 +72,7 @@ export const homePage: MarketingPageContent = {
       data: {
         eyebrow: 'Why Antvertize',
         title: 'No guesswork. No wasted spend.',
-        intro: 'We help brands scale profitably through data-driven advertising. Five reasons clients pick us\u2014and stay.',
+        intro: 'Five reasons clients pick us\u2014and stay.',
         autoplayMs: 6500,
         tabs: [
           {

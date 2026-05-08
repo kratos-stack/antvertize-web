@@ -92,7 +92,7 @@ Tell your brand story through impactful video campaigns.
 
 **Who We Are**
 
-Antvertize is a performance-driven digital advertising agency with over a decade of experience helping businesses grow through smarter media buying.
+Antvertize is a performance-driven digital advertising agency powered by consultants with over a decade of experience helping businesses grow through smarter media buying.
 
 We combine strategy, data, and creativity to deliver campaigns that don't just generate clicks, but real business results.
 

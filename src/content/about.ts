@@ -3,13 +3,13 @@ import type { MarketingPageContent } from '@/types/content'
 export const aboutPage: MarketingPageContent = {
   seo: {
     title: 'About Antvertize | Performance Digital Advertising Agency',
-    description: 'Antvertize is a performance-driven digital advertising agency with 10+ years of experience helping businesses grow through smarter media buying.',
+    description: 'Antvertize is a performance-driven digital advertising agency powered by consultants with 10+ years of experience helping businesses grow through smarter media buying.',
     canonical: 'https://antvertize.com/about',
   },
   hero: {
     eyebrow: 'About Antvertize',
     title: 'Who We Are',
-    subtitle: 'Antvertize is a performance-driven digital advertising agency with over a decade of experience helping businesses grow through smarter media buying. We combine strategy, data, and creativity to deliver campaigns that don\u2019t just generate clicks, but real business results.',
+    subtitle: 'Antvertize is a performance-driven digital advertising agency powered by consultants with over a decade of experience helping businesses grow through smarter media buying. We combine strategy, data, and creativity to deliver campaigns that don\u2019t just generate clicks, but real business results.',
     primaryCta: { label: 'Get Free Audit', action: 'route', href: '/contact' },
     secondaryCta: { label: 'Book a Strategy Call', action: 'mailto', href: 'mailto:hello@antvertize.com' },
     visual: 'about-decade',
