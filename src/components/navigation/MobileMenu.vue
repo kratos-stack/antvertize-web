@@ -2,7 +2,6 @@
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AppButton from '@/components/common/AppButton.vue'
-import AntvertizeLogo from '@/components/common/AntvertizeLogo.vue'
 import { navItems, navCta } from '@/content/navigation'
 
 const props = defineProps<{ open: boolean }>()
@@ -23,17 +22,6 @@ watch(() => props.open, (val) => {
 <template>
   <Transition name="menu">
     <div v-if="open" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <div class="menu-header">
-        <RouterLink to="/" class="logo" @click="emit('close')">
-          <AntvertizeLogo :height="32" :animate="false" />
-        </RouterLink>
-        <button class="close-btn" aria-label="Close menu" @click="emit('close')">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-
       <nav class="menu-nav">
         <ul role="list">
           <li v-for="item in navItems" :key="item.href">
@@ -66,43 +54,12 @@ watch(() => props.open, (val) => {
   -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 88px 20px 20px;
 }
-
-.menu-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--divider);
-}
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: var(--color-primary);
-}
-
-.close-btn {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  color: var(--color-secondary);
-  cursor: pointer;
-  transition: color var(--motion-fast) ease;
-}
-
-.close-btn:hover { color: var(--color-primary); }
 
 .menu-nav {
   flex: 1;
-  padding-block: 32px;
+  padding-block: 16px 32px;
 }
 
 .menu-nav ul {
