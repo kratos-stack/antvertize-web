@@ -172,43 +172,38 @@ const stageLeaveClass = computed(() =>
           @focusout="isHovering = false"
         >
           <!-- Rail: vertical on desktop, horizontal scroll on mobile -->
-          <ol
+          <div
             ref="railRef"
             role="tablist"
             aria-label="Why Antvertize"
             class="rail"
             @keydown="onKeyDown"
           >
-            <li
+            <button
               v-for="(tab, i) in tabs"
               :key="tab.id"
               :ref="(el) => { if (el) railItemRefs[i] = el as HTMLElement }"
-              class="rail-item"
-              :class="{ active: i === activeIndex }"
+              role="tab"
+              :id="`feature-tab-${tab.id}`"
+              :aria-selected="i === activeIndex"
+              :aria-controls="`feature-panel-${tab.id}`"
+              :tabindex="i === activeIndex ? 0 : -1"
+              type="button"
+              class="rail-btn"
+              @click="setActive(i, true)"
             >
-              <button
-                role="tab"
-                :id="`feature-tab-${tab.id}`"
-                :aria-selected="i === activeIndex"
-                :aria-controls="`feature-panel-${tab.id}`"
-                :tabindex="i === activeIndex ? 0 : -1"
-                type="button"
-                class="rail-btn"
-                @click="setActive(i, true)"
-              >
-                <span class="rail-indicator" aria-hidden="true">
-                  <span class="rail-indicator-fill" :style="i === activeIndex && !prefersReducedMotion ? { transform: `scaleY(${progress / 100})` } : {}" />
+              <span class="rail-indicator" aria-hidden="true">
+                <span class="rail-indicator-fill" :style="i === activeIndex && !prefersReducedMotion ? { transform: `scaleY(${progress / 100})` } : {}" />
+              </span>
+              <span class="rail-content">
+                <span class="rail-meta">
+                  <span class="rail-step">{{ String(i + 1).padStart(2, '0') }}</span>
+                  <span v-if="tab.icon" class="rail-icon" aria-hidden="true">{{ tab.icon }}</span>
                 </span>
-                <span class="rail-content">
-                  <span class="rail-meta">
-                    <span class="rail-step">{{ String(i + 1).padStart(2, '0') }}</span>
-                    <span v-if="tab.icon" class="rail-icon" aria-hidden="true">{{ tab.icon }}</span>
-                  </span>
-                  <span class="rail-label">{{ tab.label }}</span>
-                </span>
-              </button>
-            </li>
-          </ol>
+                <span class="rail-label">{{ tab.label }}</span>
+              </span>
+            </button>
+          </div>
 
           <!-- Stage -->
           <div
@@ -221,7 +216,7 @@ const stageLeaveClass = computed(() =>
               :leave-active-class="`stage-leave-active ${stageLeaveClass}`"
               mode="out-in"
             >
-              <article
+              <div
                 v-if="activeTab"
                 :key="activeTab.id"
                 role="tabpanel"
@@ -230,12 +225,12 @@ const stageLeaveClass = computed(() =>
                 class="stage-card"
               >
                 <span class="stage-glow" aria-hidden="true" />
-                <header class="stage-header">
+                <div class="stage-header">
                   <span v-if="activeTab.icon" class="stage-icon" aria-hidden="true">{{ activeTab.icon }}</span>
                   <span class="stage-step">
                     {{ String(activeIndex + 1).padStart(2, '0') }} <span class="divider">/</span> {{ String(tabs.length).padStart(2, '0') }}
                   </span>
-                </header>
+                </div>
                 <h3 class="stage-title">{{ activeTab.heading ?? activeTab.label }}</h3>
                 <ul class="stage-bullets" role="list">
                   <li
@@ -259,7 +254,7 @@ const stageLeaveClass = computed(() =>
                 >
                   <span class="stage-progress-fill" :style="{ width: `${progress}%` }" />
                 </div>
-              </article>
+              </div>
             </Transition>
           </div>
         </div>
@@ -330,11 +325,6 @@ const stageLeaveClass = computed(() =>
   }
 }
 
-.rail-item {
-  flex-shrink: 0;
-  scroll-snap-align: center;
-}
-
 .rail-btn {
   display: flex;
   align-items: center;
@@ -348,6 +338,9 @@ const stageLeaveClass = computed(() =>
   color: var(--color-secondary);
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  font: inherit;
   transition:
     color var(--motion-fast) ease,
     background var(--motion-base) var(--ease-out-expo),
@@ -366,7 +359,7 @@ const stageLeaveClass = computed(() =>
   outline-offset: 2px;
 }
 
-.rail-item.active .rail-btn {
+.rail-btn[aria-selected='true'] {
   color: #fff;
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(34, 211, 238, 0.12));
   border-color: rgba(139, 92, 246, 0.55);
@@ -394,9 +387,9 @@ const stageLeaveClass = computed(() =>
   transition: transform 80ms linear;
 }
 
-.rail-item.active .rail-indicator { background: rgba(139, 92, 246, 0.18); }
+.rail-btn[aria-selected='true'] .rail-indicator { background: rgba(139, 92, 246, 0.18); }
 
-[data-reduced-motion='true'] .rail-item.active .rail-indicator-fill {
+[data-reduced-motion='true'] .rail-btn[aria-selected='true'] .rail-indicator-fill {
   transform: scaleY(1);
 }
 
@@ -427,7 +420,7 @@ const stageLeaveClass = computed(() =>
   color: #c4b5fd;
 }
 
-.rail-item.active .rail-icon { color: #fff; }
+.rail-btn[aria-selected='true'] .rail-icon { color: #fff; }
 
 .rail-label {
   font-family: var(--font-body);
