@@ -41,7 +41,7 @@
   --gradient-hero: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 45%, #3B82F6 100%);
   --gradient-hero-soft: radial-gradient(circle at top left, rgba(139,92,246,0.35), transparent 40%),
                         radial-gradient(circle at top right, rgba(34,211,238,0.22), transparent 35%);
-  --gradient-cta: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  --gradient-cta: linear-gradient(135deg, #F59E0B 0%, #EC4899 100%);
   --gradient-card-border: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04));
   --gradient-spotlight: radial-gradient(circle, rgba(34,211,238,0.18), transparent 60%);
 
