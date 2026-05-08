@@ -22,7 +22,12 @@ export const homePage: MarketingPageContent = {
       type: 'trust-bar',
       data: {
         eyebrow: 'Trusted across leading platforms',
-        items: ['Google Ads', 'Meta Ads Manager', 'Display & Video 360', 'The Trade Desk'],
+        items: [
+          { name: 'Google Ads', logo: 'google-ads' },
+          { name: 'Meta Ads Manager', logo: 'meta-ads' },
+          { name: 'Display & Video 360', logo: 'dv360' },
+          { name: 'The Trade Desk', logo: 'trade-desk' },
+        ],
       },
     },
     {

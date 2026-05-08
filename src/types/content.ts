@@ -5,9 +5,16 @@ export type CTA = {
   target?: '_self' | '_blank'
 }
 
+export type TrustBrandLogoId = 'google-ads' | 'meta-ads' | 'dv360' | 'trade-desk'
+
+export type TrustBarItem = {
+  name: string
+  logo?: TrustBrandLogoId
+}
+
 export type TrustBarData = {
   eyebrow?: string
-  items: string[]
+  items: Array<string | TrustBarItem>
 }
 
 export type BulletListItem = {

@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import type { TrustBarData } from '@/types/content'
+import { computed } from 'vue'
+import type { TrustBarData, TrustBarItem } from '@/types/content'
 import Container from '@/components/common/Container.vue'
 import RevealOnScroll from '@/components/common/RevealOnScroll.vue'
+import BrandLogo from '@/components/common/BrandLogo.vue'
 
-defineProps<TrustBarData>()
+const props = defineProps<TrustBarData>()
+
+const normalizedItems = computed<TrustBarItem[]>(() =>
+  props.items.map(item => (typeof item === 'string' ? { name: item } : item)),
+)
 </script>
 
 <template>
@@ -13,10 +19,21 @@ defineProps<TrustBarData>()
         <div class="trust-inner">
           <span v-if="eyebrow" class="trust-eyebrow">{{ eyebrow }}</span>
           <ul class="trust-list" role="list">
-            <li v-for="(item, idx) in items" :key="item" class="trust-item">
-              <span class="trust-dot" aria-hidden="true" />
-              <span class="trust-label">{{ item }}</span>
-              <span v-if="idx < items.length - 1" class="trust-sep" aria-hidden="true">•</span>
+            <li
+              v-for="(item, idx) in normalizedItems"
+              :key="item.name"
+              class="trust-item"
+            >
+              <BrandLogo
+                v-if="item.logo"
+                class="trust-glyph"
+                :name="item.logo"
+                :label="item.name"
+                :size="22"
+              />
+              <span v-else class="trust-dot" aria-hidden="true" />
+              <span class="trust-label">{{ item.name }}</span>
+              <span v-if="idx < normalizedItems.length - 1" class="trust-sep" aria-hidden="true">•</span>
             </li>
           </ul>
         </div>
@@ -41,7 +58,7 @@ defineProps<TrustBarData>()
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
   text-align: center;
 }
 
@@ -65,7 +82,7 @@ defineProps<TrustBarData>()
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 14px 18px;
+  gap: 14px 22px;
   margin: 0;
   padding: 0;
 }
@@ -73,7 +90,7 @@ defineProps<TrustBarData>()
 .trust-item {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: clamp(15px, 1.5vw, 18px);
@@ -89,12 +106,23 @@ defineProps<TrustBarData>()
   flex-shrink: 0;
 }
 
+.trust-glyph {
+  color: var(--color-primary);
+  opacity: 0.82;
+  transition: opacity var(--motion-fast) ease;
+}
+
+.trust-item:hover .trust-glyph {
+  opacity: 1;
+}
+
 .trust-label { white-space: nowrap; }
 
 .trust-sep {
   color: var(--color-muted);
   font-size: 14px;
   opacity: 0.5;
+  margin-left: 10px;
 }
 
 @media (max-width: 640px) {
