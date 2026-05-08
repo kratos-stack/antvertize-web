@@ -113,19 +113,19 @@ function isReversed(item: ServiceItem, idx: number) {
   align-items: center;
 }
 
-.service-item.reversed .item-grid {
-  direction: rtl;
-}
-
-.service-item.reversed .item-grid > * {
-  direction: ltr;
-}
-
+/* On mobile the grid is a single column and DOM order is correct, so no
+   reordering is needed. We only swap columns on desktop, and we do it with
+   explicit grid-column placement (not `direction: rtl`) so the inline
+   axis stays LTR — otherwise Playfair Display's left-side bearings on
+   capitals like "L" and "P" get clipped at the container edge. */
 @media (min-width: 1024px) {
   .item-grid {
     grid-template-columns: 1fr 1fr;
     gap: 80px;
   }
+
+  .service-item.reversed .item-grid > :first-child  { grid-column: 2; }
+  .service-item.reversed .item-grid > :nth-child(2) { grid-column: 1; }
 }
 
 .service-text {
