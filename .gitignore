@@ -14,6 +14,8 @@ dist-ssr
 
 # Lighthouse CI reports
 .lighthouseci/
+.planning/quick/*/baseline/
+.planning/quick/*/postfix/
 
 # Editor directories and files
 .vscode/*
