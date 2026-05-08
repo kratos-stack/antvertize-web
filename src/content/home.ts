@@ -22,13 +22,18 @@ export const homePage: MarketingPageContent = {
       type: 'trust-bar',
       data: {
         eyebrow: 'Trusted across leading platforms',
-        items: ['Google Ads', 'Meta Ads Manager', 'Display & Video 360', 'The Trade Desk'],
+        items: [
+          { name: 'Google Ads', logo: 'google-ads' },
+          { name: 'Meta Ads Manager', logo: 'meta-ads' },
+          { name: 'Display & Video 360', logo: 'dv360' },
+          { name: 'The Trade Desk', logo: 'trade-desk' },
+        ],
       },
     },
     {
       type: 'card-grid',
       eyebrow: 'What We Do',
-      title: 'We help brands scale profitably through data-driven advertising. No guesswork. No wasted spend.',
+      title: 'We help brands scale profitably through data-driven advertising.',
       items: [
         {
           id: 'programmatic',
@@ -72,7 +77,7 @@ export const homePage: MarketingPageContent = {
       data: {
         eyebrow: 'Why Antvertize',
         title: 'No guesswork. No wasted spend.',
-        intro: 'We help brands scale profitably through data-driven advertising. Five reasons clients pick us\u2014and stay.',
+        intro: 'Five reasons clients pick us\u2014and stay.',
         autoplayMs: 6500,
         tabs: [
           {

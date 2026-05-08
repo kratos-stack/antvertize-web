@@ -125,13 +125,13 @@ const isSubmit = computed(() => props.cta.action === 'submit')
 
 /* Primary */
 .app-btn.primary {
-  background: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  background: var(--gradient-cta);
   color: #fff;
-  box-shadow: 0 12px 32px rgba(139, 92, 246, 0.28);
+  box-shadow: 0 12px 32px rgba(236, 72, 153, 0.32);
 }
 .app-btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(139, 92, 246, 0.38);
+  box-shadow: 0 16px 40px rgba(236, 72, 153, 0.42);
   opacity: 0.92;
 }
 .app-btn.primary:active { transform: translateY(0); }
