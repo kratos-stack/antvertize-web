@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import FloatingBadge from '@/components/surfaces/FloatingBadge.vue'
+import VisualCard from './VisualCard.vue'
 
 const audit = [
   'Account Structure',
@@ -7,79 +8,95 @@ const audit = [
   'Creative & Copy',
   'Conversion Tracking',
 ] as const
+
+// Progress ring math: r=11, circumference ≈ 69.115
+const RING_RADIUS = 11
+const RING_CIRC = 2 * Math.PI * RING_RADIUS
 </script>
 
 <template>
-  <div class="visual-shell" aria-hidden="true">
-    <div class="visual-card">
-      <div class="visual-glow" />
-
-      <div class="metric-row">
-        <FloatingBadge value="Free" label="Performance Audit" variant="violet" icon="✦" />
-        <FloatingBadge label="No Obligation" variant="cyan" icon="↑" />
-      </div>
-
-      <header class="checklist-head">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <rect x="2" y="3" width="16" height="14" rx="2.5" stroke="url(#frame-grad)" stroke-width="1.5" />
-          <path d="M6 9.5l2.4 2.4L13.5 7" stroke="url(#frame-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <defs>
-            <linearGradient id="frame-grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#8B5CF6" />
-              <stop offset="100%" stop-color="#22D3EE" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <span>Your Free Audit Includes</span>
-      </header>
-
-      <ul class="checklist" role="list">
-        <li
-          v-for="(item, i) in audit"
-          :key="item"
-          class="check-item"
-          :style="{ '--delay': `${i * 160}ms` } as Record<string, string>"
-        >
-          <span class="check-circle" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <span class="check-text">{{ item }}</span>
-        </li>
-      </ul>
-
-      <div class="visual-label">Free Audit of Your Current Campaigns</div>
+  <VisualCard glow-color="violet" label="Free Audit of Your Current Campaigns">
+    <div class="metric-row">
+      <FloatingBadge value="Free" label="Performance Audit" variant="violet" icon="✦" />
+      <FloatingBadge label="No Obligation" variant="cyan" icon="↑" />
     </div>
 
-    <FloatingBadge label="Programmatic · PPC" variant="emerald" icon="◆" class="badge-float-1" />
-    <FloatingBadge label="Social · Display · Video" variant="violet" icon="✦" class="badge-float-2" />
-  </div>
+    <header class="checklist-head">
+      <svg
+        class="progress-ring"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8B5CF6" />
+            <stop offset="100%" stop-color="#22D3EE" />
+          </linearGradient>
+        </defs>
+        <circle
+          class="ring-track"
+          cx="16"
+          cy="16"
+          :r="RING_RADIUS"
+          fill="none"
+          stroke="rgba(255,255,255,0.10)"
+          stroke-width="2.5"
+        />
+        <circle
+          class="ring-fill"
+          cx="16"
+          cy="16"
+          :r="RING_RADIUS"
+          fill="none"
+          stroke="url(#ring-grad)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          :stroke-dasharray="RING_CIRC"
+          :stroke-dashoffset="RING_CIRC"
+          transform="rotate(-90 16 16)"
+        />
+        <path
+          class="ring-check"
+          d="M11 16.5l3.2 3.2L21 13"
+          stroke="url(#ring-grad)"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+      </svg>
+      <span>Your Free Audit Includes</span>
+    </header>
+
+    <ul class="checklist" role="list">
+      <li
+        v-for="(item, i) in audit"
+        :key="item"
+        class="check-item"
+        :style="{ '--delay': `${i * 160}ms` } as Record<string, string>"
+      >
+        <span class="check-circle" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="check-text">{{ item }}</span>
+      </li>
+    </ul>
+
+    <!-- One-shot scan-line sweep on reveal — evokes an audit running. -->
+    <div class="scan-line" aria-hidden="true" />
+
+    <template #floating>
+      <FloatingBadge label="Programmatic · PPC" variant="emerald" icon="◆" class="badge-float-1" />
+      <FloatingBadge label="Social · Display · Video" variant="violet" icon="✦" class="badge-float-2" />
+    </template>
+  </VisualCard>
 </template>
 
 <style scoped>
-.visual-shell { position: relative; }
-
-.visual-card {
-  background: rgba(11, 16, 32, 0.7);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-}
-
-.visual-glow {
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 240px; height: 240px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%);
-  pointer-events: none;
-}
-
 .metric-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
 
 .checklist-head {
@@ -94,6 +111,31 @@ const audit = [
   margin-bottom: 16px;
 }
 
+.progress-ring { display: block; flex-shrink: 0; }
+
+.ring-fill {
+  /* circumference is 2πr ≈ 69.115 — use as dasharray + animate offset to 0. */
+  animation: ring-fill 1.5s var(--ease-out-expo) 0.2s forwards;
+}
+
+@keyframes ring-fill {
+  /* dashoffset 69.115 → 0 to fully fill the ring. */
+  to { stroke-dashoffset: 0; }
+}
+
+.ring-check {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: ring-check 0.5s var(--ease-out-expo) 1.6s forwards;
+  opacity: 0;
+}
+
+@keyframes ring-check {
+  0%   { stroke-dashoffset: 18; opacity: 0; }
+  20%  { opacity: 1; }
+  100% { stroke-dashoffset: 0;  opacity: 1; }
+}
+
 .checklist {
   list-style: none;
   margin: 0 0 18px;
@@ -101,6 +143,7 @@ const audit = [
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
 }
 
 .check-item {
@@ -119,11 +162,6 @@ const audit = [
 
 @keyframes check-in {
   to { opacity: 1; transform: translateX(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .check-item { opacity: 1; transform: none; animation: none; }
-  .check-circle { animation: none; }
 }
 
 .check-circle {
@@ -152,13 +190,41 @@ const audit = [
   color: var(--color-secondary);
 }
 
-.visual-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-muted);
-  letter-spacing: 0.06em;
-  text-align: center;
-  text-transform: uppercase;
+/* Scan-line sweep — runs once on mount, then settles. */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 80px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(34, 211, 238, 0.0) 30%,
+    rgba(34, 211, 238, 0.18) 50%,
+    rgba(34, 211, 238, 0.0) 70%,
+    transparent 100%
+  );
+  transform: translateY(-100%);
+  animation: scan-sweep 2.6s var(--ease-out-expo) 0.4s 1 forwards;
+  z-index: 3;
+  mix-blend-mode: screen;
+}
+
+@keyframes scan-sweep {
+  0%   { transform: translateY(-80px); opacity: 0; }
+  20%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(640px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .check-item   { opacity: 1; transform: none; animation: none; }
+  .check-circle { animation: none; transform: scale(1); }
+  .ring-fill    { stroke-dashoffset: 0; animation: none; }
+  .ring-check   { stroke-dashoffset: 0; opacity: 1; animation: none; }
+  .scan-line    { display: none; }
 }
 
 .badge-float-1 { position: absolute; bottom: -24px; left: -32px; }
