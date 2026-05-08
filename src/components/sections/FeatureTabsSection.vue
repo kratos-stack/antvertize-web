@@ -212,9 +212,10 @@ const stageLeaveClass = computed(() =>
             @touchend.passive="onTouchEnd"
           >
             <Transition
-              :enter-active-class="`stage-enter-active ${stageEnterClass}`"
-              :leave-active-class="`stage-leave-active ${stageLeaveClass}`"
-              mode="out-in"
+              :enter-from-class="`stage-enter-from ${stageEnterClass}`"
+              :leave-to-class="`stage-leave-to ${stageLeaveClass}`"
+              enter-active-class="stage-enter-active"
+              leave-active-class="stage-leave-active"
             >
               <div
                 v-if="activeTab"
@@ -236,7 +237,7 @@ const stageLeaveClass = computed(() =>
                   <li
                     v-for="(item, j) in activeTab.items"
                     :key="j"
-                    :style="{ animationDelay: `${120 + j * 80}ms` }"
+                    :style="{ animationDelay: `${40 + j * 40}ms` }"
                   >
                     <span class="check" aria-hidden="true">
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -434,9 +435,18 @@ const stageLeaveClass = computed(() =>
 .stage {
   position: relative;
   min-height: 360px;
+  /* Grid stacking — both panels (incoming + outgoing) occupy the same
+     cell during a transition so they crossfade in place without any
+     layout shift. The container sizes to the larger of the two while
+     they coexist. */
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .stage-card {
+  /* Stack into the same grid cell. */
+  grid-column: 1;
+  grid-row: 1;
   position: relative;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -449,6 +459,7 @@ const stageLeaveClass = computed(() =>
   flex-direction: column;
   gap: 20px;
   height: 100%;
+  will-change: transform, opacity;
 }
 
 @media (min-width: 768px) {
@@ -536,7 +547,7 @@ const stageLeaveClass = computed(() =>
   color: var(--color-secondary);
   opacity: 0;
   transform: translateY(6px);
-  animation: bullet-in 0.55s var(--ease-out-expo) forwards;
+  animation: bullet-in 0.36s var(--ease-out-expo) forwards;
 }
 
 @keyframes bullet-in {
@@ -587,27 +598,26 @@ const stageLeaveClass = computed(() =>
   .stage-progress { display: none; }
 }
 
-/* Vue transitions
-   With <Transition mode="out-in">, the leave runs to completion before the
-   enter starts. To make the next panel appear "as soon as the previous timer
-   is done", we keep a smooth enter (it's the part the user actually watches)
-   but make the leave near-instant — a 120ms fade with no slide. */
+/* Vue transitions — snappy simultaneous crossfade.
+   Leave + enter run in parallel (no `out-in` mode). Both panels stack
+   into the same grid cell so they overlap visually during the swap.
+   Enter is direction-aware: forward = slight up-slide, backward mirrors. */
 .stage-enter-active {
   transition:
-    opacity 360ms var(--ease-out-expo),
-    transform 420ms var(--ease-out-expo);
+    opacity 320ms var(--ease-out-expo),
+    transform 360ms var(--ease-out-expo);
 }
 
 .stage-leave-active {
   transition:
-    opacity 120ms ease-out,
-    transform 120ms ease-out;
+    opacity 220ms ease-out,
+    transform 240ms ease-out;
 }
 
-.stage-enter-forward  { opacity: 0; transform: translateY(24px); }
-.stage-enter-backward { opacity: 0; transform: translateY(-24px); }
-.stage-leave-forward,
-.stage-leave-backward { opacity: 0; transform: translateY(0); }
+.stage-enter-from.stage-enter-forward  { opacity: 0; transform: translateY(14px) scale(0.985); }
+.stage-enter-from.stage-enter-backward { opacity: 0; transform: translateY(-14px) scale(0.985); }
+.stage-leave-to.stage-leave-forward    { opacity: 0; transform: translateY(-10px) scale(0.985); }
+.stage-leave-to.stage-leave-backward   { opacity: 0; transform: translateY(10px) scale(0.985); }
 
 [data-reduced-motion='true'] .stage-enter-active,
 [data-reduced-motion='true'] .stage-leave-active {
