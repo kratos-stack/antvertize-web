@@ -18,7 +18,7 @@ const RING_CIRC = 2 * Math.PI * RING_RADIUS
   <VisualCard glow-color="violet" label="Free Audit of Your Current Campaigns">
     <div class="metric-row">
       <FloatingBadge value="Free" label="Performance Audit" variant="violet" icon="✦" />
-      <FloatingBadge label="No Obligation" variant="cyan" icon="↑" />
+      <FloatingBadge label="No Obligation" variant="cyan" icon="✓" />
     </div>
 
     <header class="checklist-head">

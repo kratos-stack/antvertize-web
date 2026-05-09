@@ -56,8 +56,8 @@ onBeforeUnmount(() => {
     </ul>
 
     <template #floating>
-      <FloatingBadge value="Performance" label="First Approach" variant="emerald" icon="↓" class="badge-float-1" />
-      <FloatingBadge value="Transparent" label="Reporting" variant="violet" icon="↑" class="badge-float-2" />
+      <FloatingBadge value="Performance" label="First Approach" variant="emerald" icon="↑" class="badge-float-1" />
+      <FloatingBadge value="Transparent" label="Reporting" variant="violet" icon="★" class="badge-float-2" />
     </template>
   </VisualCard>
 </template>

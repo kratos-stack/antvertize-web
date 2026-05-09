@@ -30,7 +30,7 @@ const cells: { heat: Heat; col: number; row: number; spike?: boolean }[] = [
   <VisualCard glow-color="violet" label="Predictable Growth Trajectory">
     <div class="metric-row">
       <FloatingBadge value="Performance" label="First Approach" variant="violet" icon="↑" />
-      <FloatingBadge value="Predictable" label="Growth" variant="cyan" icon="↓" />
+      <FloatingBadge value="Predictable" label="Growth" variant="cyan" icon="✓" />
     </div>
 
     <div class="heatmap" aria-hidden="true">
