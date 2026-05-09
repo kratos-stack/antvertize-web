@@ -53,7 +53,11 @@ const router = createRouter({
     { path: '/about-antvertize', redirect: '/about' },
     { path: '/careers', redirect: '/about' },
 
-    { path: '/:pathMatch(.*)*', redirect: '/' },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/pages/NotFoundPage.vue'),
+    },
   ],
 })
 
